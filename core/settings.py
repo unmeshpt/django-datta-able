@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "home",
+    "staff_app"
 
     # Tooling Dynamic_DT
     'django_dyn_dt',             # <-- NEW: Dynamic_DT
