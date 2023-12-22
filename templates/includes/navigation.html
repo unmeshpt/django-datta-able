@@ -7,7 +7,7 @@
       <div class="b-bg">
         <i class="feather icon-trending-up"></i>
       </div>
-      <span class="b-title">Datta Able</span>
+      <span class="b-title">Deon Designs</span>
     </a>
   </div>
   <a class="mobile-menu" id="mobile-header" href="javascript:">
@@ -17,14 +17,14 @@
     <ul class="navbar-nav mr-auto">
       <li><a href="javascript:" class="full-screen" onclick="javascript:toggleFullScreen()"><i
             class="feather icon-maximize"></i></a></li>
-      <li class="nav-item dropdown">
+      {% comment %} <li class="nav-item dropdown">
         <a class="dropdown-toggle" href="javascript:" data-toggle="dropdown">Dropdown</a>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="javascript:">Action</a></li>
           <li><a class="dropdown-item" href="javascript:">Another action</a></li>
           <li><a class="dropdown-item" href="javascript:">Something else here</a></li>
         </ul>
-      </li>
+      </li> {% endcomment %}
       <li class="nav-item">
         <div class="main-search">
           <div class="input-group">
@@ -54,8 +54,8 @@
             <div class="noti-head">
               <h6 class="d-inline-block m-b-0">Notifications</h6>
               <div class="float-right">
-                <a href="javascript:" class="m-r-10">mark as read</a>
-                <a href="javascript:">clear all</a>
+                <a href="javascript:" class="m-r-10">Mark as read</a>
+                <a href="javascript:">Clear all</a>
               </div>
             </div>
             <ul class="noti-body">
@@ -110,7 +110,7 @@
           <div class="dropdown-menu dropdown-menu-right profile-notification">
             <div class="pro-head">
               <img src="{% static 'assets/images/user/avatar-1.jpg' %}" class="img-radius" alt="User-Profile-Image">
-              <span>John Doe</span>
+              <span>{{user.first_name|default:"User logged out"}}</span>
               {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
                 <a href="{% url 'admin:logout' %}" class="dud-logout" title="Logout">
@@ -121,16 +121,18 @@
                 </a>
               {% endif %}
             </div>
+            
             <ul class="pro-body">
-              <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i>
-                  Settings</a></li>
+              {% if request.user.is_authenticated %}
+              {% comment %} <li><a href="#" class="dropdown-item"><i class="feather icon-settings"></i>
+                  Settings</a></li> {% endcomment %}
               <li><a href="{% url 'profile' %}" class="dropdown-item"><i class="feather icon-user"></i>
                   Profile</a></li>
               <li><a href="#" class="dropdown-item"><i class="feather icon-mail"></i> My
                   Messages</a></li>
-              <li><a href="#" class="dropdown-item"><i class="feather icon-lock"></i> Lock
-                  Screen</a></li>
-              {% if request.user.is_authenticated %}
+              {% comment %} <li><a href="#" class="dropdown-item"><i class="feather icon-lock"></i> Lock
+                  Screen</a></li> {% endcomment %}
+              
               <li>
                 {% if request.user.is_superuser %}
                 <a href="{% url 'admin:password_change' %}" class="dropdown-item">
@@ -140,6 +142,9 @@
                   <i class="feather icon-edit"></i>Change Password
                 </a>
               </li>
+              {% else %}
+              <li><a href="{% url 'login' %}" class="dropdown-item"><i class="feather icon-log-in"></i>
+                Sign IN</a></li>
               {% endif %}
             </ul>
           </div>

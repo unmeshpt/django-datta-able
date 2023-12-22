@@ -56,7 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 
     "home",
-    "staff_app"
+    "staffs",
 
     # Tooling Dynamic_DT
     'django_dyn_dt',             # <-- NEW: Dynamic_DT
@@ -175,6 +175,9 @@ STATICFILES_DIRS = (
     os.path.join(DYN_DB_PKG_ROOT, "templates/static"),                # <-- NEW: Dynamic_DT 
 )
 
+MEDIA_URL='media/'
+MEDIA_ROOT= os.path.join (BASE_DIR, '/media/')
+
 #if not DEBUG:
 #    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
@@ -190,6 +193,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DYNAMIC_DATATB = {
     # SLUG -> Import_PATH 
     'product'  : "home.models.Product",
+    'staffs'  : "staffs.models.Staff",
+    'position'  : "staffs.models.Position",
+    'department'  : "staffs.models.Department",
 }
 ########################################
 
@@ -197,6 +203,9 @@ DYNAMIC_DATATB = {
 API_GENERATOR = {
     # SLUG -> Import_PATH 
     'product'  : "home.models.Product",
+    'staffs'  : "staff.models.Staff",
+    'position'  : "staff.models.Position",
+    'department'  : "staff.models.Department",
 }
 
 REST_FRAMEWORK = {
