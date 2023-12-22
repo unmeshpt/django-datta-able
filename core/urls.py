@@ -25,7 +25,7 @@ urlpatterns = [
     path("", include('admin_datta.urls')),
     path('', include('django_dyn_dt.urls')), # <-- NEW: Dynamic_DT Routing   
 ]
-urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # Lazy-load on routing is needed
 # During the first build, API is not yet generated
 try:

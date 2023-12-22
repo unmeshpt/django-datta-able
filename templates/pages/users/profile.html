@@ -1,0 +1,118 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block breadcrumbs %}{% endblock breadcrumbs %}
+
+{% block content %}
+
+  <!-- [ Main Content ] start -->
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header">
+          <h5>Edit Info</h5>
+        </div>
+        <div class="card-block">
+          <form method="post" action='update_profile/'  >
+            <input type="text" value="{{user.id}}"  class="form-control" style="display: none;"  name="id" readonly  >
+            <div class="row">
+              <div class="col-sm-6 mb-2">
+                <div class="form-group">
+                  <label for="fn">First Name</label>
+                  <input type="text" value="{{user.first_name}}" class="form-control" id="fn" aria-describedby="emailHelp"
+                  name="first_name" placeholder="First name">
+                </div>
+              </div>
+              <div class="col-sm-6  mb-2">
+                <div class="form-group">
+                  <label for="ln">Last Name</label>
+                  <input type="text" value="{{user.last_name}}"  class="form-control" id="ln" aria-describedby="emailHelp"
+                  name="last_name" placeholder="Last name" required>
+                </div>
+              </div>
+
+              <div class="col-sm-12  mb-2">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" name="email" value="{{user.email}}" placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+                </div>
+              </div>
+
+              <div class="col-sm-12  mb-2">
+                <div class="form-group">
+                  <label for="ln">Phone Number</label>
+                  <input type="text" value=""  class="form-control" id="ln" aria-describedby="emailHelp"
+                  name="phone" placeholder="Contact number">
+                  <small id="addd" class="form-text text-muted">We'll never share your phone number with anyone
+                    else.</small>
+                </div>
+              </div>
+
+              <div class="col-sm-12  mb-2">
+                <div class="form-group">
+                  <label for="address">Personal Address</label>
+                  <textarea class="form-control" name="address" value=""  placeholder="Personal address"  id="address" rows="2"></textarea>
+                </div>
+              </div>
+
+              <div class="col-sm-12  mb-2">
+                <div class="form-group">
+                  <label for="bio">About Info</label>
+                  <textarea class="form-control" name="bio" value=""  placeholder="Bio"  id="bio" rows="4"></textarea>
+                  <small id="abf" class="form-text text-muted">We'll show this on your profile. (Max 350 Charachter)</small>
+                </div>
+              </div>
+
+              <div class="col-sm-12  mb-2">
+                <div class="form-group">
+                  <label for="dp">Profile Photo</label>
+                  <input type="file" value="" name="profileimg" class="form-control" id="dp" aria-describedby="emailHelp"
+                  name="last_name" >
+                  <small id="addd" class="form-text text-muted">Select your photo for your profile. 
+                    (size-max: 300x300px)</small>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary mb-2">Update Profile</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-block">
+          <div class="d-flex align-items-center justify-content-center flex-column">
+            <div class="w-50 p-3">
+              <img src="https://via.placeholder.com/500" alt="profile image"
+                class="img-fluid rounded-circle">
+            </div>
+            <div class="text-center">
+              <h4 class="font-weight-bold h6">{{user.first_name}} {{user.last_name}}</h4>
+              {% comment %} <p class="font-italic text-muted">Lorem ipsum dolor.</p> {% endcomment %}
+            </div>
+          </div>
+
+          <div class="small font-weight-light mt-4 text-center text-muted">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos
+              esse excepturi fugiat id numquam? Enim illo, perferendis. Eum, ratione,
+              voluptas?</p>
+          </div>
+          {% comment %} <div class="d-flex justify-content-center align-items-center">
+            <a href="#" class="h6 text-muted d-block m-1"><i class="icon feather icon-facebook"></i></a>
+            <a href="#" class="h6 text-muted d-block m-1"><i class="icon feather icon-twitter"></i></a>
+            <a href="#" class="h6 text-muted d-block m-1"><i class="icon feather icon-instagram"></i></a>
+
+          </div> {% endcomment %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+
+ {% endblock content %}

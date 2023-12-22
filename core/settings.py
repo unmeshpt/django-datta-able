@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 
     "home",
     "staffs",
+    "profiles",
 
     # Tooling Dynamic_DT
     'django_dyn_dt',             # <-- NEW: Dynamic_DT
