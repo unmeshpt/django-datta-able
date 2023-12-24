@@ -176,8 +176,8 @@ STATICFILES_DIRS = (
     os.path.join(DYN_DB_PKG_ROOT, "templates/static"),                # <-- NEW: Dynamic_DT 
 )
 
-MEDIA_URL='media/'
-MEDIA_ROOT= os.path.join (BASE_DIR, '/media/')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 #if not DEBUG:
 #    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

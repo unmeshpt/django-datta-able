@@ -21,6 +21,7 @@ from django.conf import settings
 urlpatterns = [
     path('', include('home.urls')),
     path('', include('staffs.urls')),
+    path('', include('profiles.urls')),
     path("admin/", admin.site.urls),
     path("", include('admin_datta.urls')),
     path('', include('django_dyn_dt.urls')), # <-- NEW: Dynamic_DT Routing   
