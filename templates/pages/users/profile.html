@@ -28,6 +28,7 @@
                   name="first_name" placeholder="First name" required>
                 </div>
               </div>
+
               <div class="col-sm-6  mb-2">
                 <div class="form-group">
                   <label for="ln">Last Name</label>
@@ -36,7 +37,6 @@
                 </div>
               </div>
 
-              
               <div class="col-sm-12  mb-2">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
@@ -47,7 +47,6 @@
                 </div>
               </div> 
               
-
               <div class="col-sm-12  mb-2">
                 <div class="form-group">
                   <label for="address">Personal Address</label>
@@ -91,6 +90,7 @@
         </div>
       </div>
     </div>
+
     <div class="col-sm-4">
       <div class="card">
         <div class="card-block">
@@ -111,7 +111,15 @@
               {% else %}
               <h4 class="font-weight-bold h6">{{user}}</h4>
               {% endif %}
-              {% comment %} <p class="font-italic text-muted">Lorem ipsum dolor.</p> {% endcomment %}
+              
+              {% if user.is_staff %}
+              <p class="font-italic text-muted">{{ profile.position | default:"STAFF" }}</p>
+              {% elif user.is_superuser %}
+              <p class="font-italic text-muted">SUPER USER</p>
+              {% else %}
+              <p class="font-italic text-muted">USER</p>
+              {% endif %}
+            
             </div>
           </div>
 
@@ -122,7 +130,6 @@
             <a href="#" class="h6 text-muted d-block m-1"><i class="icon feather icon-facebook"></i></a>
             <a href="#" class="h6 text-muted d-block m-1"><i class="icon feather icon-twitter"></i></a>
             <a href="#" class="h6 text-muted d-block m-1"><i class="icon feather icon-instagram"></i></a>
-
           </div> {% endcomment %}
         </div>
       </div>

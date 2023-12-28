@@ -16,6 +16,8 @@ from dotenv import load_dotenv
 
 import django_dyn_dt
 
+import profiles
+
 load_dotenv()  # take environment variables from .env.
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -188,13 +190,18 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOGIN_REDIRECT_URL = '/'
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# AUTH_USER_MODEL = 'profiles.CustomUser'
 
 # ### DYNAMIC_DATATB Settings ###
 DYNAMIC_DATATB = {
     # SLUG -> Import_PATH 
     'product'  : "home.models.Product",
     'staffs'  : "staffs.models.Staff",
+    'userprofile'  : "staffs.models.UserProfile",
     'position'  : "staffs.models.Position",
     'department'  : "staffs.models.Department",
 }
@@ -205,6 +212,7 @@ API_GENERATOR = {
     # SLUG -> Import_PATH 
     'product'  : "home.models.Product",
     'staffs'  : "staff.models.Staff",
+    'userprofile'  : "staffs.models.UserProfile",
     'position'  : "staff.models.Position",
     'department'  : "staff.models.Department",
 }
@@ -215,4 +223,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
+
+
 ########################################
