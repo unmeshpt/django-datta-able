@@ -14,9 +14,8 @@ def update_profile(request):
         user.save()
     
         profile=Profile.objects.filter(user=request.user).first()
-        if not profile:
+        if profile is None:
             profile=Profile()
-        
         profile.user = request.user
         profile.address = request.POST['address']
         profile.phone = request.POST['phone']

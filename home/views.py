@@ -7,13 +7,19 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
 from .models import *
+from profiles.models import Profile
 
+@login_required(login_url='/accounts/login/')
 def index(request):
-
+  if request.user is not None:
+    profile = Profile.objects.filter(user=request.user).first()
+  else:
+    profile=None
   context = {
     'segment'  : 'index',
-    #'products' : Product.objects.all()
+    'profile' : profile
   }
+  
   return render(request, "pages/index.html", context)
 
 def tables(request):

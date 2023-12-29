@@ -97,7 +97,7 @@
           <div class="d-flex align-items-center justify-content-center flex-column">
             <div class="w-50 p-3">
               {% if profile.profileimg %}
-              <img src="{{ profile.profileimg.url  }}" alt="profile image"
+              <img src="{{ profile.profileimg.url}}" alt="profile image"
                 class="img-fluid rounded-circle">
               {% else %}
               <img src="https://via.placeholder.com/500" alt="profile image"
@@ -112,12 +112,12 @@
               <h4 class="font-weight-bold h6">{{user}}</h4>
               {% endif %}
               
-              {% if user.is_staff %}
-              <p class="font-italic text-muted">{{ profile.position | default:"STAFF" }}</p>
-              {% elif user.is_superuser %}
-              <p class="font-italic text-muted">SUPER USER</p>
+              {% if user.is_superuser  %}
+              <p class="font-italic text-muted">Super User</p>
+              {% elif user.is_staff %}
+              <p class="font-italic text-muted">{{ staff.position | default:"Company Staff" }}</p>
               {% else %}
-              <p class="font-italic text-muted">USER</p>
+              <p class="font-italic text-muted">User</p>
               {% endif %}
             
             </div>

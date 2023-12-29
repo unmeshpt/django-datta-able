@@ -1,10 +1,5 @@
 from django.db import models
-
-STATUS=(
-    ('pending','Pending'),
-    ('active','Active'),
-    ('inactive','Inactive'),
-)
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Position(models.Model):
@@ -20,14 +15,10 @@ class Department(models.Model):
         return self.name
 
 class Staff(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=12, blank=True, null=True)
+    user=models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_staff')
     hire_date = models.DateField()
-    position = models.OneToOneField(Position, on_delete=models.SET_NULL, null=True, blank=True, related_name='staff_position',)
-    department = models.OneToOneField(Department, on_delete=models.SET_NULL, null=True, blank=True, related_name='staff_department', )
-    staff_image = models.ImageField(upload_to='files/staff_assets/staff_photos', null=True)
-    Current_Status = models.CharField( max_length=50,null=True,choices=STATUS,default='pending')
+    position = models.ForeignKey(Position, on_delete=models.SET_NULL, null=True, blank=True, related_name='staff_position')
+    department = models.ForeignKey(Department, on_delete=models.SET_NULL, null=True, blank=True, related_name='staff_department')
+    
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.user}"
