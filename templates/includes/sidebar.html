@@ -18,7 +18,7 @@
         </li>
         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item {% if 'index' in segment %}active{% endif %}">
           {% if request.user.is_superuser %}
-          <a href="{% url 'admin:index' %}" class="nav-link ">
+          <a href="{% url 'index' %}" class="nav-link ">
           {% else %}
           <a href="{% url 'index' %}" class="nav-link ">
           {% endif %}
@@ -80,7 +80,7 @@
           {% endfor %}
         {% endif %}
 
-        {% if request.user.is_authenticated   %}
+        {% if request.user.is_authenticated and not request.user.is_superuser %}
         <li class="nav-item pcoded-menu-caption">
           <label>UI Element</label>
         </li>
@@ -94,6 +94,21 @@
                   class="pcoded-badge label label-danger">NEW</span></a></li>
           </ul>
         </li>
+        {% comment %} Applications {% endcomment %}
+        <li class="nav-item pcoded-menu-caption">
+          <label>Applications</label>
+        </li>
+        <li
+          data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
+          class="nav-item pcoded-hasmenu {% if 'basic_components' in parent %}active pcoded-trigger{% endif %}">
+          <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
+                class="feather icon-box"></i></span><span class="pcoded-mtext">Clients</span></a>
+          <ul class="pcoded-submenu">
+            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="{% url 'new_order' %}" class="">Request Quote <span
+                  class="pcoded-badge label label-danger">NEW</span></a></li>
+          </ul>
+        </li>
+
         <li class="nav-item pcoded-menu-caption">
           <label>Authentication</label>
         </li>

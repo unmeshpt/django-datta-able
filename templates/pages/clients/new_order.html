@@ -8,7 +8,7 @@
     <div class="col-sm-8">
       <div class="card">
         <div class="card-header">
-          <h5>Edit Info</h5>
+          <h5>New Quotation Request</h5>
         </div>
         <div class="card-block">
             <div class="row">
@@ -61,22 +61,6 @@
                     else.</small>
                 </div>
               </div> 
-
-              <div class="col-sm-12  mb-2">
-                <div class="form-group">
-                  <label for="gender">Gender</label>
-                  <input type="select" class="form-control" id="gender"
-                    name="gender" value="{{profile.gender}}" placeholder="Gender"  required> 
-                </div>
-              </div> 
-
-              <div class="col-sm-12  mb-2">
-                <div class="form-group">
-                  <label for="dob">Date of Birth</label>
-                  <input type="date" class="form-control" id="dob"
-                    name="dob" value="{{profile.dob}}" placeholder="Date"  required> 
-                </div>
-              </div> 
               
               <div class="col-sm-12  mb-2">
                 <div class="form-group">
@@ -107,9 +91,21 @@
 
     <div class="col-sm-4">
       <div class="card">
+        <div class="card-header">
+            <h5>Our Services</h5>
+          </div>
         <div class="card-block">
-          <div class="d-flex align-items-center justify-content-center flex-column">
-            <div class="w-50 p-3">
+          <div class="d-flex align-items-start justify-content-start ">
+            <div class='row'>
+              {% for service in services %}
+               <div class='col-4 mb-3'>
+                <a href="{% url 'icon_feather' %}" class=""><span class="pcoded-badge label label-primary"><i class="feather icon-chevron-right text-c-green"></i>&nbsp; {{service.service}}</span>
+               </div>
+              {% endfor %}
+            </div>
+            
+           
+            {% comment %} <div class="w-50 p-3">
               {% if profile.profileimg %}
               <img src="{{ profile.profileimg.url}}" alt="profile image"
                 class="img-fluid rounded-circle">
@@ -134,17 +130,8 @@
               <p class="font-italic text-muted">User</p>
               {% endif %}
             
-            </div>
+            </div> {% endcomment %}
           </div>
-
-          <div class="small font-weight-light mt-4 text-center text-muted">
-            <p>{{profile.bio}}</p>
-          </div>
-          {% comment %} <div class="d-flex justify-content-center align-items-center">
-            <a href="#" class="h6 text-muted d-block m-1"><i class="icon feather icon-facebook"></i></a>
-            <a href="#" class="h6 text-muted d-block m-1"><i class="icon feather icon-twitter"></i></a>
-            <a href="#" class="h6 text-muted d-block m-1"><i class="icon feather icon-instagram"></i></a>
-          </div> {% endcomment %}
         </div>
       </div>
     </div>

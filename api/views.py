@@ -18,7 +18,7 @@ except:
 
 class ProductView(APIView):
 
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly)
 
     def post(self, request):
         serializer = ProductSerializer(data=request.data)

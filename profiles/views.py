@@ -19,6 +19,8 @@ def update_profile(request):
         profile.user = request.user
         profile.address = request.POST['address']
         profile.phone = request.POST['phone']
+        profile.gender=request.POST['gender']
+        profile.dob=request.POST['dob']
         profile.bio = request.POST['bio'] 
         profile.profileimg=request.FILES['profileimg']
         profile.save()

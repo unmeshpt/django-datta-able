@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     "home",
     "staffs",
     "profiles",
+    "clients",
+    "company",
 
     # Tooling Dynamic_DT
     'django_dyn_dt',             # <-- NEW: Dynamic_DT
@@ -112,7 +114,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 DATABASES = {
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'sample_db',
+        'NAME': 'sample_db1',
         'HOST':'127.0.0.1',
         'PORT': '5432',
         'USER': 'postgres',

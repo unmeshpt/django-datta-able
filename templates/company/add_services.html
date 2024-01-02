@@ -1,0 +1,48 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- [ Main Content ] start -->
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-header">
+          <h5>Add New Service</h5>
+        </div>
+        <div class="card-block">
+            <div class="row">
+              
+            </div>
+
+          <form method="post" action="{% url 'add_services' %}"  autocomplete="off" >
+            {% csrf_token %} 
+            <div class="row">
+
+              <div class="col-sm-6 mb-2">
+                <div class="form-group">
+                  <label for="fn">Item</label>
+                  <input type="text" class="form-control" id="fn" aria-describedby="emailHelp"
+                  name="item" placeholder="Item" required>
+                </div>
+              </div>
+              
+              <div class="col-sm-12  mb-2">
+                <div class="form-group">
+                  <label for="Description">Description</label>
+                  <textarea class="form-control" name="description"  placeholder="Describe something about item"  id="Description" rows="2"></textarea>
+                </div>
+              </div>
+
+              <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary shadow-2 mb-2">Add Service</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+
+ {% endblock content %}
