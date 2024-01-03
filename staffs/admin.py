@@ -7,8 +7,8 @@ from django.utils.html import format_html
 
 # Register your models here.
 class StaffAdmin(admin.ModelAdmin):
-    list_filter=['position','department']
-    list_display=['user','position','department']
+    list_filter=['position']
+    list_display=['user','position']
     # search_fields=['position', "status"]
     list_per_page=10
 
