@@ -62,19 +62,23 @@
                 </div>
               </div> 
 
-              <div class="col-sm-12  mb-2">
+              <div class="col-sm-6  mb-2">
                 <div class="form-group">
                   <label for="gender">Gender</label>
-                  <input type="select" class="form-control" id="gender"
-                    name="gender" value="{{profile.gender}}" placeholder="Gender"  required> 
+                  <select class="form-control" name="gender" id="gender" required>
+                    <option value="">{{profile.gender}}</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                  </select>
                 </div>
               </div> 
 
-              <div class="col-sm-12  mb-2">
+              <div class="col-sm-6 mb-2">
                 <div class="form-group">
                   <label for="dob">Date of Birth</label>
                   <input type="date" class="form-control" id="dob"
-                    name="dob" value="{{profile.dob}}" placeholder="Date"  required> 
+                    name="dob" value="{{profile.dob|date:'Y-m-d'}}" placeholder="Date"  required> 
                 </div>
               </div> 
               

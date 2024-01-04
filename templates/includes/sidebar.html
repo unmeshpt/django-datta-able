@@ -34,24 +34,12 @@
                 class="feather icon-zap text-c-green"></i></span><span class="pcoded-mtext">Generated API</span></a>
         </li> {% endcomment %}
 
-        {% if not request.user.is_authenticated  %}
-        <li
-          data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe"
-          class="nav-item pcoded-hasmenu">
-          <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
-                class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
-          <ul class="pcoded-submenu">
-            <li class=""><a href="{% url 'login' %}" class="">Signin</a></li>
-            <li class=""><a href="{% url 'register' %}" class="">Signup</a></li>
-          </ul>
+       
+        <li class="nav-item pcoded-menu-caption">
+          <label>Applications</label>
         </li>
-        {% endif %}
-
         {% admin_get_menu as app_list %}
         {% if app_list %}
-          <li class="nav-item pcoded-menu-caption">
-            <label>Applications</label>
-          </li>
           {% for app in app_list %}
             {% if app.has_perms and not app.pinned %}
               <li 
@@ -80,6 +68,19 @@
           {% endfor %}
         {% endif %}
 
+        {% if not request.user.is_staff   %}
+        <li
+          data-username="clients"
+          class="nav-item pcoded-hasmenu {% if 'basic_components' in parent %}active pcoded-trigger{% endif %}">
+          <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
+                class="feather icon-box"></i></span><span class="pcoded-mtext">Clients</span></a>
+          <ul class="pcoded-submenu">
+            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="{% url 'new_order' %}" class="">Request Quote <span
+                  class="pcoded-badge label label-danger">NEW</span></a></li>
+          </ul>
+        </li>
+        {% endif %}
+
         {% if request.user.is_authenticated and not request.user.is_superuser %}
         <li class="nav-item pcoded-menu-caption">
           <label>UI Element</label>
@@ -94,27 +95,28 @@
                   class="pcoded-badge label label-danger">NEW</span></a></li>
           </ul>
         </li>
-        {% comment %} Applications {% endcomment %}
-        <li class="nav-item pcoded-menu-caption">
-          <label>Applications</label>
-        </li>
-        <li
-          data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
-          class="nav-item pcoded-hasmenu {% if 'basic_components' in parent %}active pcoded-trigger{% endif %}">
-          <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
-                class="feather icon-box"></i></span><span class="pcoded-mtext">Clients</span></a>
-          <ul class="pcoded-submenu">
-            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="{% url 'new_order' %}" class="">Request Quote <span
-                  class="pcoded-badge label label-danger">NEW</span></a></li>
-          </ul>
-        </li>
 
+        
         <li class="nav-item pcoded-menu-caption">
           <label>Authentication</label>
         </li>
-        <li data-username="Disabled Menu" class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span
-              class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Signout</span></a>
+     
+        {% if not request.user.is_authenticated  %}
+        <li
+          data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe"
+          class="nav-item pcoded-hasmenu">
+          <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
+                class="feather icon-lock"></i></span><span class="pcoded-mtext">Authentication</span></a>
+          <ul class="pcoded-submenu">
+            <li class=""><a href="{% url 'login' %}" class="">Signin</a></li>
+            <li class=""><a href="{% url 'register' %}" class="">Signup</a></li>
+          </ul>
         </li>
+        {% else %}
+          <li data-username="Disabled Menu" class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span
+            class="pcoded-micon"><i class="feather icon-power"></i></span><span class="pcoded-mtext">Signout</span></a>
+          </li>
+        {% endif %}
           {% comment %} {% if request.user.is_superuser %}
             <li class="nav-item pcoded-menu-caption">
               <label>Authentication</label>
