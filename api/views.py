@@ -85,3 +85,31 @@ class ProductView(APIView):
             'success': True
         }, status=HTTPStatus.OK)
 
+class OrderView(APIView):
+    permission_classes = (IsAuthenticatedOrReadOnly)
+    def get(self, request, pk=None):
+        if not pk:
+            return Response({
+                'data': [OrderItemSerializer(instance=obj).data for obj in OrderItem.objects.all()],
+                'success': True
+            }, status=HTTPStatus.OK)
+        try:
+            obj = get_object_or_404(OrderItem, pk=pk)
+        except Http404:
+            return Response(data={
+                'message': 'object with given id not found.',
+                'success': False
+            }, status=HTTPStatus.NOT_FOUND)
+        return Response({
+            'data': OrderItemSerializer(instance=obj).data,
+            'success': True
+        }, status=HTTPStatus.OK)
+    
+    def post(self, request):
+        return Response({'post':'post'})
+    
+    def put(self, request):
+        return Response({'put':'put'})
+
+    def delete(self, request, pk=None):
+        return Response({'delete':'delete'})

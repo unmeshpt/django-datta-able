@@ -5,133 +5,132 @@
 
   <!-- [ Main Content ] start -->
   <div class="row">
-    <div class="col-sm-8">
+    <div class="col-lg-4">
       <div class="card">
         <div class="card-header">
-          <h5>New Quotation Request</h5>
+          <h5>New Order Request</h5>
         </div>
         <div class="card-block">
-            <div class="row">
-              
-            </div>
+          
+            <form method="post" action="{% url 'create_order' %}" autocomplete="off" >
+              {% csrf_token %} 
+              <div class="row ">
 
-          <form method="post" action="{% url 'update_profile' %}"  enctype="multipart/form-data" autocomplete="off" >
-            {% csrf_token %} 
-            <div class="row">
+                <div class="col-sm-6 mb-2">
+                  <div class="form-group">
+                    <label for="orderno">Order No</label>
+                    <input type="text" value="{{neworder.order_no}}" class="form-control" id="orderno" aria-describedby="emailHelp"
+                    name="order_no" placeholder="Order Number" required readonly>
+                  </div>
+                </div>
 
-              <div class="col-sm-6 mb-2">
-                <div class="form-group">
-                  <label for="fn">First Name</label>
-                  <input type="text" value="{{user.first_name}}" class="form-control" id="fn" aria-describedby="emailHelp"
-                  name="first_name" placeholder="First name" required>
+                <div class="col-sm-6 mb-2">
+                  <div class="form-group">
+                    <label for="deadline">Deadline</label>
+                    <input type="date" class="form-control" id="deadline"
+                      name="dob" value="{{neworder.deadline|date:'Y-m-d'}}" placeholder="Deadline"  required> 
+                  </div>
+                </div>
+
+                <div class="col-sm-12 mb-2">
+                  <div class="form-group">
+                    <label for="project_name">Project Name</label>
+                    <input type="text" class="form-control" id="project_name"
+                      name="project_name" value="{{neworder.project_name}}" placeholder="Project Name"  required> 
+                  </div>
+                </div>
+
+                <div class="col-sm-12 mb-2">
+                  <button type="submit" class="btn btn-primary shadow-2 mb-2">Send Order</button>
                 </div>
               </div>
+            </form>
 
-              <div class="col-sm-6  mb-2">
-                <div class="form-group">
-                  <label for="ln">Last Name</label>
-                  <input type="text" value="{{user.last_name}}"  class="form-control" id="ln" aria-describedby="emailHelp"
-                  name="last_name" placeholder="Last name" required>
+            <hr>
+
+            <form method="post" action="{% url 'add_product' %}"  autocomplete="off" >
+              {% csrf_token %} 
+              <div class="row">
+                <div class="col-sm-6 mb-2">
+                  <div class="form-group">
+                    <label for="item">Item</label>
+                    <select class="form-control" name="item" id="item" required>
+                      {% for service in services %}
+                        <optgroup label="{{service.service}}">
+                          {% for product in products %}
+                            {% if  service.service == product.services.service %}
+                              <option value="{{product.product}}">{{product.product}}</option>
+                            {% endif %}
+                          {% endfor %}
+                        </optgroup>
+                      {% endfor %}
+                    </select>
+                  </div>
+                </div> 
+
+                <div class="col-sm-4 mb-2">
+                  <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" value="" class="form-control" id="quantity" aria-describedby="emailHelp"
+                    name="quantity" placeholder="Quantity" required>
+                  </div>
+                </div>
+
+                <div class="col-sm-12  mb-2">
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" name="description" placeholder="Description"  id="description" rows="4"></textarea>
+                    <small id="description" class="form-text text-muted">(Max 350 Charachter)</small>
+                  </div>
+                </div>
+                <div class="col-sm-12">
+                  <button type="submit" class="btn btn-primary shadow-2 mb-2">Add Products</button>
                 </div>
               </div>
-
-              <div class="col-sm-12  mb-2">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" name="email" value="{{user.email}}" placeholder="Email Address"  required> 
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                    else.</small>
-                </div>
-              </div> 
-              
-              <div class="col-sm-12  mb-2">
-                <div class="form-group">
-                  <label for="address">Personal Address</label>
-                  <textarea class="form-control" name="address"  placeholder="Personal address"  id="address" rows="2" required>{{profile.address}}</textarea>
-                </div>
-              </div>
-
-              <div class="col-sm-12  mb-2">
-                <div class="form-group">
-                  <label for="ph">Phone Number</label>
-                  <input type="text" class="form-control" id="ph"
-                    name="phone" value="{{profile.phone}}" placeholder="Phone number"  required> 
-                  <small id="ph" class="form-text text-muted">We'll never share your phone number with anyone
-                    else.</small>
-                </div>
-              </div> 
-              
-              <div class="col-sm-12  mb-2">
-                <div class="form-group">
-                  <label for="bio">About Info</label>
-                  <textarea class="form-control" name="bio" placeholder="Bio"  id="bio" rows="4" required>{{profile.bio}}</textarea>
-                  <small id="abf" class="form-text text-muted">We'll show this on your profile. (Max 350 Charachter)</small>
-                </div>
-              </div>
-
-              <div class="col-sm-12  mb-2">
-                <div class="form-group">
-                  <label for="dp">Profile Photo</label>
-                  <input type="file" value="" name="profileimg" class="form-control" id="dp" 
-                  name="last_name" required>
-                  <small id="addd" class="form-text text-muted">Select your photo for your profile. 
-                    (size-max: 500 x 500px)</small>
-                </div>
-              </div>
-
-              <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary shadow-2 mb-2">Update Profile</button>
-              </div>
-            </div>
-          </form>
+            </form>
+          
         </div>
       </div>
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-lg-8">
       <div class="card">
         <div class="card-header">
-            <h5>Our Services</h5>
+            <h5>Added item</h5>
           </div>
-        <div class="card-block">
-          <div class="d-flex align-items-start justify-content-start ">
-            <div class='row'>
-              {% for service in services %}
-               <div class='col-4 mb-3'>
-                <a href="{% url 'icon_feather' %}" class=""><span class="pcoded-badge label label-primary"><i class="feather icon-chevron-right text-c-green"></i>&nbsp; {{service.service}}</span>
-               </div>
-              {% endfor %}
-            </div>
-            
-           
-            {% comment %} <div class="w-50 p-3">
-              {% if profile.profileimg %}
-              <img src="{{ profile.profileimg.url}}" alt="profile image"
-                class="img-fluid rounded-circle">
-              {% else %}
-              <img src="https://via.placeholder.com/500" alt="profile image"
-                class="img-fluid rounded-circle">
-              {% endif %}
-            </div>
-            
-            <div class="text-center">
-              {% if user.first_name  and user.last_name  %}
-              <h4 class="font-weight-bold h6">{{user.first_name}} {{user.last_name}}</h4>
-              {% else %}
-              <h4 class="font-weight-bold h6">{{user}}</h4>
-              {% endif %}
-              
-              {% if user.is_superuser  %}
-              <p class="font-italic text-muted">Super User</p>
-              {% elif user.is_staff %}
-              <p class="font-italic text-muted">{{ staff.position | default:"Company Staff" }}</p>
-              {% else %}
-              <p class="font-italic text-muted">User</p>
-              {% endif %}
-            
-            </div> {% endcomment %}
+        <div class="card-block table-border-style">
+          {% if order_items %}
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-left">#</th>
+                  <th scope="col" class="text-left">Item</th>
+                  <th scope="col" class="text-center">Quantity</th>
+                  <th scope="col" class="text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for items in order_items %}
+                <tr>
+                  <td scope="row" class="text-left"></td>
+                  <td class="text-left">
+                    <h5 class="m-0 mb-1">{{ items.item }}</h5>
+                    <p class="m-0">{{ items.description }}</p>
+                  </td>
+                  <td class="text-center">{{ items.quantity }}</td>
+                  <td class="text-center">
+                    {% comment %} {% url 'delete_addeditem' items.id %} {% endcomment %}
+                    <a href=" {% url 'delete_addeditem' items.id %}"  id="{{items.id}}" title="Delete"><span
+                      class="pcoded-badge label label-danger"><i class="feather icon-trash-2"></span></i></a
+                    >
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -139,3 +138,19 @@
   <!-- [ Main Content ] end -->
 
  {% endblock content %}
+ {% block extra_js %}
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+  {% if messages %} 
+    {% for message in messages %}
+        Swal.fire({
+          position: "top-end",
+          icon: "{{message.tags}}",
+          title: "{{message}}",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+    {% endfor %} 
+  {% endif %}
+  </script>
+ {% endblock extra_js %}

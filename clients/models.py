@@ -3,11 +3,18 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class NewOrder(models.Model):    
+    STATUS = [
+        ('New', 'New'),
+        ('Active', 'Active'),
+        ('Cancelled', 'Cancelled'),
+        ('Pending', 'Pending'),
+        ('Done', 'Done')
+    ]    
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='user_order')
-    order_no = models.CharField(max_length=20)
-    project_name=models.CharField( max_length=50)
+    order_no = models.CharField(max_length=20, unique=True)
+    project_name=models.CharField( max_length=50, null=True, blank=True)
     deadline=models.DateField()
-    order_status= models.CharField(max_length=20)
+    order_status= models.CharField(max_length=20, choices=STATUS)
 
     created_at=models.DateField(auto_now_add=True)
     updated_at=models.DateField(auto_now=True)
