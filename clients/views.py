@@ -16,15 +16,14 @@ def create_ordernumber():
     
 @login_required(login_url='/accounts/login/')
 def add_product(request):
-    order_no = create_ordernumber()
     if request.method == 'POST':
        orderitem =OrderItem()
-       orderitem.new_order=NewOrder.objects.get(order_no=order_no)
+       orderitem.new_order=NewOrder.objects.get(user=request.user, order_status='New')
        orderitem.item = request.POST['item']
        orderitem.description = request.POST['description']
        orderitem.quantity = request.POST['quantity']
        orderitem.save()
-       messages.success(request,"Item Added successfully")
+       # messages.success(request,"Item Added successfully")
        return redirect('new_order')
     
     # order_items= OrderItem.objects.filter(new_order__order_no=order_no)
@@ -39,56 +38,45 @@ def add_product(request):
 
 @login_required(login_url='/accounts/login/')
 def create_order(request):
-    products=Products.objects.all()
-    services=Services.objects.all()
-    context = {
-    'parent': 'clients',
-    'segment': 'new_order',
-    'products':products,
-    'services':services
-    }
-    return render(request, 'pages/clients/new_order.html', context)
-
-@login_required(login_url='/accounts/login/')
-def new_order(request):
-    order_no = create_ordernumber()
-    neworder = NewOrder.objects.get(order_no=order_no, order_status='New' )
-    
+    neworder = NewOrder.objects.filter(user=request.user, order_status='New').first()
     if request.method == 'POST':
-        neworder.user=request.user
-        neworder.order_no = order_no
         neworder.project_name = request.POST['project_name']
         neworder.deadline = request.POST['deadline']
         neworder.order_status= 'Active'
         neworder.save()
-
-        lastorderno=LastOrderNo()
-        lastorderno.order_no=order_no
-        lastorderno.save()
-        
         return redirect('new_order')
     
-    if  neworder is None:
+    # products=Products.objects.all()
+    # services=Services.objects.all()
+    # context = {
+    # 'parent': 'clients',
+    # 'segment': 'new_order',
+    # 'products':products,
+    # 'services':services
+    # }
+    # return render(request, 'pages/clients/new_order.html', context)
+
+@login_required(login_url='/accounts/login/')
+def new_order(request):
+    neworder = NewOrder.objects.filter(user=request.user, order_status='New').first()
+    if (neworder is None):
         neworder=NewOrder()  
         neworder.user=request.user
-        neworder.order_no = order_no
+        neworder.order_no = generate_order_number()
         neworder.project_name = ""
         neworder.deadline = (datetime.now() + timedelta(days = 5)).date().isoformat()
         neworder.order_status= 'New'
         neworder.save()
         return redirect('new_order')
     
-   
-    
-
-    order_items= OrderItem.objects.filter(new_order__order_no=order_no)
+    order_items= OrderItem.objects.filter(new_order__order_no=neworder.order_no)
     products=Products.objects.all()
     services=Services.objects.all()
    
     context = {
-    'parent': 'clients', 'segment': 'new_order', 'oder_no':order_no,
-    'products':products, 'services':services, 'order_items':order_items,
-    'neworder':neworder
+        'parent': 'clients', 'segment': 'new_order', 
+        'products':products, 'services':services, 'order_items':order_items,
+        'neworder':neworder
     }
 
     return render(request, 'pages/clients/new_order.html', context)
