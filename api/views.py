@@ -11,7 +11,8 @@ from api.serializers import *
 
 try:
 
-    from home.models import Product
+    from home.models import *
+    from clients.models import *
 
 except:
     pass
@@ -86,7 +87,7 @@ class ProductView(APIView):
         }, status=HTTPStatus.OK)
 
 class OrderView(APIView):
-    permission_classes = (IsAuthenticatedOrReadOnly)
+    # permission_classes = (IsAuthenticatedOrReadOnly)
     def get(self, request, pk=None):
         if not pk:
             return Response({
@@ -106,6 +107,17 @@ class OrderView(APIView):
         }, status=HTTPStatus.OK)
     
     def post(self, request):
+        serializer = NewOrderSerializer(data=request.data )
+        if not serializer.is_valid():
+            return Response(data={
+                **serializer.errors,
+                'success': False
+            }, status=HTTPStatus.BAD_REQUEST)
+        serializer.save()
+        return Response(data={
+            'message': 'New Order Created.',
+            'success': True
+        }, status=HTTPStatus.OK)
         return Response({'post':'post'})
     
     def put(self, request):

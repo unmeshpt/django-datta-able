@@ -16,7 +16,7 @@ class Profile(models.Model):
     phone= models.CharField(max_length=12, blank=True, null=True)
     dob=models.DateField(null=True)
     is_admin=models.BooleanField(default=False)
-    profileimg=models.ImageField(upload_to='images/users/', null=True)
+    profileimg=models.ImageField(upload_to='images/users/', null=True, blank=True)
 
     created_at=models.DateField(auto_now_add=True)
     updated_at=models.DateField(auto_now=True)

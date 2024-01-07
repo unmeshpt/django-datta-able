@@ -23,3 +23,12 @@ class OrderItemSerializer(serializers.ModelSerializer):
         except:
             pass
         fields='__all__'
+
+class NewOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        try:
+            model = NewOrder
+        except:
+            pass
+        # exclude=['order_status']
+        fields='__all__'

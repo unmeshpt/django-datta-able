@@ -3,8 +3,8 @@ from .models import *
 
 
 class NewOrderAdmin(admin.ModelAdmin):
-    list_filter=['order_no']
-    list_display=['order_no','project_name','deadline', 'order_status']
+    list_filter=['user']
+    list_display=['user','order_no','project_name','deadline', 'order_status', 'assets']
     search_fields=['deadline', 'order_status']
     list_per_page=10
 

@@ -4,13 +4,14 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from company.models import *
 from .models import *
+from api.serializers import *
 
-def create_ordernumber():
-    current_year = datetime.now().year
-    total_order = LastOrderNo.objects.count()
-    new_order_no=total_order + 1
-    order_no = f'{'ORD-' + str(current_year)[-2:]}/{str(new_order_no).zfill(3)}'
-    return order_no
+# def create_ordernumber():
+#     current_year = datetime.now().year
+#     total_order = LastOrderNo.objects.count()
+#     new_order_no=total_order + 1
+#     order_no = f'{'ORD-' + str(current_year)[-2:]}/{str(new_order_no).zfill(3)}'
+#     return order_no
 
 # Create your views here.
     
@@ -38,23 +39,23 @@ def add_product(request):
 
 @login_required(login_url='/accounts/login/')
 def create_order(request):
+
     neworder = NewOrder.objects.filter(user=request.user, order_status='New').first()
+    order_items= OrderItem.objects.filter(new_order__order_no=neworder.order_no)
+
     if request.method == 'POST':
-        neworder.project_name = request.POST['project_name']
-        neworder.deadline = request.POST['deadline']
-        neworder.order_status= 'Active'
-        neworder.save()
-        return redirect('new_order')
-    
-    # products=Products.objects.all()
-    # services=Services.objects.all()
-    # context = {
-    # 'parent': 'clients',
-    # 'segment': 'new_order',
-    # 'products':products,
-    # 'services':services
-    # }
-    # return render(request, 'pages/clients/new_order.html', context)
+        if  not order_items.count() == 0 :
+            neworder.project_name = request.POST['project_name']
+            neworder.deadline = request.POST['deadline']
+            if request.FILES.get('assets'):
+                neworder.assets =request.FILES['assets']
+            neworder.order_status= 'Active'
+            neworder.save()
+            return redirect('new_order')
+        else:
+           messages.warning(request,"No item added yet!!!")
+           return redirect('new_order')
+ 
 
 @login_required(login_url='/accounts/login/')
 def new_order(request):

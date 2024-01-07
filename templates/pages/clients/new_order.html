@@ -12,7 +12,7 @@
         </div>
         <div class="card-block">
           
-            <form method="post" action="{% url 'create_order' %}" autocomplete="off" >
+            <form method="post" action="{% url 'create_order' %}" enctype="multipart/form-data" autocomplete="off" >
               {% csrf_token %} 
               <div class="row ">
 
@@ -41,6 +41,14 @@
                 </div>
 
                 <div class="col-sm-12 mb-2">
+                  <div class="form-group">
+                    <label for="assets">Attachments </label>
+                    <input type="file" class="form-control" id="assets" name="assets" accept=".zip, .rar">
+                    <small id="assets" class="form-text text-muted">{{neworder.assets}}</small>
+                  </div>
+                </div>
+
+                <div class="col-sm-12 mb-2">
                   <button type="submit" class="btn btn-primary shadow-2 mb-2">Send Order</button>
                 </div>
               </div>
@@ -51,7 +59,7 @@
             <form method="post" action="{% url 'add_product' %}"  autocomplete="off" >
               {% csrf_token %} 
               <div class="row">
-                <div class="col-sm-6 mb-2">
+                <div class="col-sm-8 mb-2">
                   <div class="form-group">
                     <label for="item">Item</label>
                     <select class="form-control" name="item" id="item" required>
@@ -79,7 +87,7 @@
                 <div class="col-sm-12  mb-2">
                   <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" name="description" placeholder="Description"  id="description" rows="4"></textarea>
+                    <textarea class="form-control" name="description" placeholder="Description"  id="description" rows="3"></textarea>
                     <small id="description" class="form-text text-muted">(Max 350 Charachter)</small>
                   </div>
                 </div>
