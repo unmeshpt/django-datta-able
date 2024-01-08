@@ -75,8 +75,14 @@
           <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i
                 class="feather icon-box"></i></span><span class="pcoded-mtext">Clients</span></a>
           <ul class="pcoded-submenu">
-            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="{% url 'new_order' %}" class="">Request Quote <span
+            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="{% url 'new_order' %}" >Request for Quote<span
                   class="pcoded-badge label label-danger">NEW</span></a></li>
+            <hr>
+            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="#" >Inbox</a><span
+              class="pcoded-badge label label-danger">NEW</span></li>      
+            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="#" >Sent</a></li>
+            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="#" >Recycle Bin</a></li>
+            
           </ul>
         </li>
         {% endif %}

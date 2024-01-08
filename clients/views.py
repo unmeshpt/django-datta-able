@@ -51,6 +51,7 @@ def create_order(request):
                 neworder.assets =request.FILES['assets']
             neworder.order_status= 'Active'
             neworder.save()
+            messages.success(request,"Order sent successfully")
             return redirect('new_order')
         else:
            messages.warning(request,"No item added yet!!!")
