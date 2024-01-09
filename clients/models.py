@@ -4,6 +4,7 @@ from django.utils import timezone
 import os
 
 # Create your models here.
+
 def custom_upload_to(instance, filename):
     """Custom function to change the filename of uploaded files."""
     neworder = NewOrder.objects.filter(user=instance.user, order_status='New').first()
@@ -32,6 +33,13 @@ class NewOrder(models.Model):
     def __str__(self):
         return self.order_no
     
+    def delete(self, *args, **kwargs):
+        # Delete the file associated with the instance
+        self.assets.delete()
+
+        # Call the base class delete() method to delete the model instance
+        super().delete(*args, **kwargs)
+        
 
     
 def generate_order_number():

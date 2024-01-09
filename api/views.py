@@ -13,6 +13,7 @@ try:
 
     from home.models import *
     from clients.models import *
+    from profiles.models import *    
 
 except:
     pass
@@ -125,3 +126,72 @@ class OrderView(APIView):
 
     def delete(self, request, pk=None):
         return Response({'delete':'delete'})
+    
+class ProfileView(APIView):
+
+    # permission_classes = (IsAuthenticatedOrReadOnly)
+
+    def post(self, request):
+        serializer = ProfileSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(data={
+                **serializer.errors,
+                'success': False
+            }, status=HTTPStatus.BAD_REQUEST)
+        serializer.save()
+        return Response(data={
+            'message': 'Record Created.',
+            'success': True
+        }, status=HTTPStatus.OK)
+
+    def get(self, request, pk=None):
+        if not pk:
+            return Response({
+                'data': [ProfileSerializer(instance=obj).data for obj in Profile.objects.all()],
+                'success': True
+            }, status=HTTPStatus.OK)
+        try:
+            obj = get_object_or_404(Profile, pk=pk)
+        except Http404:
+            return Response(data={
+                'message': 'object with given id not found.',
+                'success': False
+            }, status=HTTPStatus.NOT_FOUND)
+        return Response({
+            'data': ProfileSerializer(instance=obj).data,
+            'success': True
+        }, status=HTTPStatus.OK)
+
+    def put(self, request, pk):
+        try:
+            obj = get_object_or_404(Profile, pk=pk)
+        except Http404:
+            return Response(data={
+                'message': 'object with given id not found.',
+                'success': False
+            }, status=HTTPStatus.NOT_FOUND)
+        serializer = ProfileSerializer(instance=obj, data=request.data, partial=True)
+        if not serializer.is_valid():
+            return Response(data={
+                **serializer.errors,
+                'success': False
+            }, status=HTTPStatus.BAD_REQUEST)
+        serializer.save()
+        return Response(data={
+            'message': 'Record Updated.',
+            'success': True
+        }, status=HTTPStatus.OK)
+
+    def delete(self, request, pk):
+        try:
+            obj = get_object_or_404(Profile, pk=pk)
+        except Http404:
+            return Response(data={
+                'message': 'object with given id not found.',
+                'success': False
+            }, status=HTTPStatus.NOT_FOUND)
+        obj.delete()
+        return Response(data={
+            'message': 'Record Deleted.',
+            'success': True
+        }, status=HTTPStatus.OK)

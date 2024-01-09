@@ -6,7 +6,7 @@ from . models import *
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def update_profile(request):
-    if  request.method == 'POST' and request.FILES.get('profileimg'): 
+    if  request.method == 'POST': 
         user=User.objects.get(username=request.user)
         user.first_name=request.POST['first_name']
         user.last_name=request.POST['last_name']
@@ -17,13 +17,19 @@ def update_profile(request):
         if (profile is None):
             profile=Profile()
         profile.user = request.user
-        profile.address = request.POST['address']
+        profile.house_no = request.POST['house_no']
+        profile.street = request.POST['street']
+        profile.city = request.POST['city']
+        profile.state = request.POST['state']
+        profile.country = request.POST['country']
+        profile.zipcode = request.POST['zipcode']
         profile.phone = request.POST['phone']
         profile.gender=request.POST['gender']
         profile.dob=request.POST['dob']
         profile.is_admin=False
         profile.bio = request.POST['bio'] 
-        profile.profileimg=request.FILES['profileimg']
+        if request.FILES.get('profileimg'):
+                profile.profileimg =request.FILES['profileimg']
         profile.save()
         return redirect('profile')
     else:
