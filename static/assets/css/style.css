@@ -67,11 +67,11 @@ body {
 }
 
 *:focus {
-  outline: none;
+  outline: none ;
 }
 
 a:hover {
-  outline: none;
+  outline: none ; 
   text-decoration: none;
 }
 

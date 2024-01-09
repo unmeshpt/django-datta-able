@@ -14,7 +14,7 @@
 
           {% if all_oders %}
           <div class="table-responsive">
-            <table class="table table-striped" id="sample">
+            <table class="table table-sm table-striped" id="sample">
               <thead>
                 <tr>
                   <th scope="col" class="text-left">Date</th>
@@ -35,15 +35,16 @@
                     <td class="text-center">{{ order.deadline | date:'d-m-Y' }}</td>
                     <td class="text-left">{{ order.order_status }}</td>
                     <td class="text-center">
-                        <a href="" id="{{order.id}}" title="View" data-toggle="modal" data-target="#exampleModalCenter{{order.id}}"><span
+                        <a @click = "showModal:true"  title="View" data-toggle="modal" data-target="#products{{order.id}}"><span
                             class="pcoded-badge label label-primary"><i class="feather icon-eye"></span></i></a>
+
                         <a href=" {% url 'del_order' order.id %}"  id="{{order.id}}" title="Delete" ><span
                         class="pcoded-badge label label-danger"><i class="feather icon-trash-2"></span></i></a>
                         
                     </td>
                     </tr>
-                    {% endif %}  
                     {% include 'pages/clients/include/items.html' %}
+                    {% endif %}
                 {% endfor %}
               </tbody>
             </table>
@@ -55,5 +56,6 @@
   </div>
   
   <!-- [ Main Content ] end -->
+ 
 
  {% endblock content %}

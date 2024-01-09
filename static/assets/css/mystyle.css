@@ -1,0 +1,13 @@
+*:focus {
+    outline: none !important;
+  }
+
+  a{
+    outline: none !important; 
+    text-decoration: none !important;
+  }
+  
+  a:hover {
+    outline: none !important; 
+    text-decoration: none !important;
+  }

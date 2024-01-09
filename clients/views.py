@@ -15,10 +15,8 @@ def orders(request):
         'parent': 'clients', 'segment': 'sent_orders', 
         'all_oders':all_oders, 'order_items':order_items,
     }
-
     return render(request, 'pages/clients/sent.html', context)
-
-
+    
 @login_required(login_url='/accounts/login/')
 def add_product(request):
     if request.method == 'POST':
@@ -30,6 +28,7 @@ def add_product(request):
        orderitem.save()
        # messages.success(request,"Item Added successfully")
        return redirect('new_order')
+    
 
 @login_required(login_url='/accounts/login/')
 def create_order(request):
@@ -79,22 +78,22 @@ def new_order(request):
 
 
 @login_required (login_url='/accounts/login/')
-def delete_addeditem(request, id):
-    instance = get_object_or_404(OrderItem, id=id)
+def delete_addeditem(request, pk):
+    instance = get_object_or_404(OrderItem, pk=pk)
     instance.delete()
     messages.success(request,"Item deleted successfully")
     return redirect('new_order')
 
 @login_required (login_url='/accounts/login/')
-def del_order(request, id):
-    instance = get_object_or_404(NewOrder, id=id)
+def del_order(request, pk):
+    instance = get_object_or_404(NewOrder, pk=pk)
     instance.delete()
     messages.success(request,"Order deleted successfully")
     return redirect('orders')
 
 @login_required (login_url='/accounts/login/')
-def view_order(request, id):
-    order = NewOrder.objects.get(pk=id)
+def view_order(request, pk):
+    order = NewOrder.objects.get(pk=pk)
     order_items= OrderItem.objects.filter(new_order__order_no=order.order_no).order_by('id')
     context = {
         'order_items':order_items,   

@@ -4,6 +4,7 @@ from rest_framework import serializers
 try:
     from home.models import *
     from clients.models import *
+    from profiles.models import *
 except:
     pass 
 
@@ -28,6 +29,15 @@ class NewOrderSerializer(serializers.ModelSerializer):
     class Meta:
         try:
             model = NewOrder
+        except:
+            pass
+        # exclude=['order_status']
+        fields='__all__'
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        try:
+            model = Profile
         except:
             pass
         # exclude=['order_status']

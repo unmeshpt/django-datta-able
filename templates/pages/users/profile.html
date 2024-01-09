@@ -19,7 +19,7 @@
             {% csrf_token %} 
             <div class="row">
 
-              <div class="col-sm-6 mb-2">
+              <div class="col-sm-6 ">
                 <div class="form-group">
                   <label for="fn">First Name</label>
                   <input type="text" value="{{user.first_name}}" class="form-control" id="fn" aria-describedby="emailHelp"
@@ -27,7 +27,7 @@
                 </div>
               </div>
 
-              <div class="col-sm-6  mb-2">
+              <div class="col-sm-6 ">
                 <div class="form-group">
                   <label for="ln">Last Name</label>
                   <input type="text" value="{{user.last_name}}"  class="form-control" id="ln" aria-describedby="emailHelp"
@@ -35,7 +35,7 @@
                 </div>
               </div>
 
-              <div class="col-sm-12  mb-2">
+              <div class="col-sm-12">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address</label>
                   <input type="email" class="form-control" id="exampleInputEmail1"
@@ -45,14 +45,49 @@
                 </div>
               </div> 
               
-              <div class="col-sm-12  mb-2">
+              <div class="col-sm-6 ">
                 <div class="form-group">
-                  <label for="address">Personal Address</label>
-                  <textarea class="form-control" name="address"  placeholder="Personal address"  id="address" rows="2" required>{{profile.address}}</textarea>
+                  <label for="house_no">Address/House/Building No</label>
+                  <input type="text" class="form-control" id="house_no" name="house_no" value="{{profile.house_no}}" placeholder="Address">
                 </div>
               </div>
 
-              <div class="col-sm-12  mb-2">
+              <div class="col-sm-6 ">
+                <div class="form-group">
+                  <label for="street">Street Name</label>
+                  <input type="text" class="form-control" id="street" name="street" value="{{profile.street}}" placeholder="Street">
+                </div>
+              </div>
+
+              <div class="col-sm-6 ">
+                <div class="form-group">
+                  <label for="city">City or Locality</label>
+                  <input type="text" class="form-control" id="city" name="city" value="{{profile.city}}" placeholder="City or Locality">
+                </div>
+              </div>
+
+              <div class="col-sm-6 ">
+                <div class="form-group">
+                  <label for="state">State or Region</label>
+                  <input type="text" class="form-control" id="state" name="state" value="{{profile.state}}" placeholder="State or Region">
+                </div>
+              </div>
+
+              <div class="col-sm-6 ">
+                <div class="form-group">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" id="country" name="country" value="{{profile.country}}" placeholder="Country">
+                </div>
+              </div>
+
+              <div class="col-sm-6 ">
+                <div class="form-group">
+                  <label for="zipcode">Postal Code</label>
+                  <input type="text" class="form-control" id="zipcode" name="zipcode" value="{{profile.zipcode}}" placeholder="Postal Code or ZIP Code">
+                </div>
+              </div>
+
+              <div class="col-sm-12 ">
                 <div class="form-group">
                   <label for="ph">Phone Number</label>
                   <input type="text" class="form-control" id="ph"
@@ -62,11 +97,11 @@
                 </div>
               </div> 
 
-              <div class="col-sm-6  mb-2">
+              <div class="col-sm-6">
                 <div class="form-group">
                   <label for="gender">Gender</label>
                   <select class="form-control" name="gender" id="gender" required>
-                    <option value="">{{profile.gender}}</option>
+                    <option value="{{profile.gender}}">{{profile.gender}}</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
@@ -74,7 +109,7 @@
                 </div>
               </div> 
 
-              <div class="col-sm-6 mb-2">
+              <div class="col-sm-6">
                 <div class="form-group">
                   <label for="dob">Date of Birth</label>
                   <input type="date" class="form-control" id="dob"
@@ -82,7 +117,7 @@
                 </div>
               </div> 
               
-              <div class="col-sm-12  mb-2">
+              <div class="col-sm-12">
                 <div class="form-group">
                   <label for="bio">About Info</label>
                   <textarea class="form-control" name="bio" placeholder="Bio"  id="bio" rows="4" required>{{profile.bio}}</textarea>
@@ -90,11 +125,10 @@
                 </div>
               </div>
 
-              <div class="col-sm-12  mb-2">
+              <div class="col-sm-12">
                 <div class="form-group">
                   <label for="dp">Profile Photo</label>
-                  <input type="file" value="" name="profileimg" class="form-control" id="dp" 
-                  name="last_name" required>
+                  <input type="file" value="" name="profileimg" class="form-control" id="dp">
                   <small id="addd" class="form-text text-muted">Select your photo for your profile. 
                     (size-max: 500 x 500px)</small>
                 </div>
