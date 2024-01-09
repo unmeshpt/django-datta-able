@@ -44,4 +44,11 @@ def order_reject(request, pk):
   messages.success(request,"Order rejected!!!")
   return redirect ("index")
 
+def order_cancel(request, pk):
+  order= NewOrder.objects.get(pk=pk)
+  order.order_status="Cancelled"
+  order.save()
+  messages.success(request,"Order Cancelled!!!")
+  return redirect ("index")
+
 

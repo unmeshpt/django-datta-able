@@ -5,6 +5,9 @@ def active_orders(request):
     if request.user.is_authenticated:
         try:
             activeorders['activeorders'] = NewOrder.objects.select_related('user').filter(order_status="Active")
+            activeorders['rejectedorders'] = NewOrder.objects.select_related('user').filter(order_status="Rejected")
+            activeorders['approvedorders'] = NewOrder.objects.select_related('user').filter(order_status="Approved")
+            activeorders['pendingorders'] = NewOrder.objects.select_related('user').filter(order_status="Pending")
         except NewOrder.DoesNotExist:
             return activeorders
     return activeorders

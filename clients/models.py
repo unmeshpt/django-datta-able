@@ -17,6 +17,7 @@ class NewOrder(models.Model):
         ('New', 'New'),
         ('Active', 'Active'),
         ('Approved', 'Approved'),
+        ('Rejected', 'Rejected'),
         ('Cancelled', 'Cancelled'),
         ('Pending', 'Pending'),
         ('Done', 'Done')
