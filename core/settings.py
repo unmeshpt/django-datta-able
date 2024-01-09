@@ -101,6 +101,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "profiles.context_processors.user_profile",
                 "staffs.context_processors.user_staff",
+                "home.context_processors.active_orders",
             ],
         },
     },

@@ -137,6 +137,10 @@ strong {
   background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
 }
 
+.theme-bg1 {
+  background: linear-gradient(-135deg, #f59df5 0%, #dd76f1 100%);
+}
+
 .theme-bg2 {
   background: linear-gradient(-135deg, #899FD4 0%, #A389D4 100%);
 }
@@ -7276,9 +7280,9 @@ select.form-control-lg:not([size]):not([multiple]) {
 ==========================  **/
 .table td,
 .table th {
-  border-top: 1px solid #eaeaea;
+  border-top: 0px solid #eaeaea !important;
   white-space: nowrap;
-  padding: 1.05rem 0.75rem;
+  padding: 0.75rem 0.75rem !important;
 }
 .table thead th {
   border-bottom: 1px solid #eaeaea;
@@ -7298,12 +7302,12 @@ select.form-control-lg:not([size]):not([multiple]) {
 
 /* Zebra-striping */
 .table-striped tbody tr:nth-of-type(2n+1) {
-  background-color: rgba(4, 169, 245, 0.05);
+  background-color: rgba(0, 145, 255, 0.05);
 }
 
 /* Hover effect */
 .table-hover tbody tr:hover {
-  background-color: rgba(4, 169, 245, 0.05);
+  background-color: rgba(0, 169, 245, 0.05);
 }
 
 /* Table backgrounds */

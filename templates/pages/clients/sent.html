@@ -14,7 +14,7 @@
 
           {% if all_oders %}
           <div class="table-responsive">
-            <table class="table table-sm table-striped" id="sample">
+            <table class="table table-striped" id="example" style="width:100%">
               <thead>
                 <tr>
                   <th scope="col" class="text-left">Date</th>
@@ -27,24 +27,24 @@
               </thead>
               <tbody>
                 {% for order in all_oders %}
-                    {% if  order.order_status == 'Active' %}
                     <tr>
-                    <td class="text-left">{{ order.created_at | date:'d-m-Y' }}</td>
-                    <td class="text-left">{{ order.order_no }}</td>
-                    <td class="text-left">{{ order.project_name | upper }}</td>
-                    <td class="text-center">{{ order.deadline | date:'d-m-Y' }}</td>
-                    <td class="text-left">{{ order.order_status }}</td>
-                    <td class="text-center">
-                        <a @click = "showModal:true"  title="View" data-toggle="modal" data-target="#products{{order.id}}"><span
-                            class="pcoded-badge label label-primary"><i class="feather icon-eye"></span></i></a>
-
-                        <a href=" {% url 'del_order' order.id %}"  id="{{order.id}}" title="Delete" ><span
-                        class="pcoded-badge label label-danger"><i class="feather icon-trash-2"></span></i></a>
+                      {% if  order.order_status == 'Active' %}  
                         
-                    </td>
-                    </tr>
-                    {% include 'pages/clients/include/items.html' %}
-                    {% endif %}
+                        <td class="text-left">{{ order.created_at | date:'d-m-Y' }}</td>
+                        <td class="text-left">{{ order.order_no }}</td>
+                        <td class="text-left">{{ order.project_name | upper }}</td>
+                        <td class="text-center">{{ order.deadline | date:'d-m-Y' }}</td>
+                        <td class="text-left">{{ order.order_status }}</td>
+                        <td class="text-center">
+                            <a  title="View" data-toggle="modal" data-target="#products{{order.id}}"><span
+                                class="pcoded-badge label label-primary"><i class="feather icon-eye"></span></i></a>
+
+                            <a href=" {% url 'del_order' order.id %}"  id="{{order.id}}" title="Delete" ><span
+                            class="pcoded-badge label label-danger"><i class="feather icon-trash-2"></span></i></a>
+                        </td>
+                        {% comment %} {% include 'pages/clients/include/items.html' %} {% endcomment %}
+                      {% endif %}
+                    </tr> 
                 {% endfor %}
               </tbody>
             </table>

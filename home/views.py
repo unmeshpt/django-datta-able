@@ -3,11 +3,13 @@ from admin_datta.forms import RegistrationForm, LoginForm, UserPasswordChangeFor
 from django.contrib.auth.views import LoginView, PasswordChangeView, PasswordResetConfirmView, PasswordResetView
 from django.views.generic import CreateView
 from django.contrib.auth import logout
+from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 
 from .models import *
-from profiles.models import Profile
+from profiles.models import *
+from clients.models import *
 
 @login_required(login_url='/accounts/login/')
 def index(request):
@@ -27,3 +29,19 @@ def tables(request):
     'segment': 'tables'
   }
   return render(request, "pages/dynamic-tables.html", context)
+
+def order_approve(request, pk):
+  order= NewOrder.objects.get(pk=pk)
+  order.order_status="Approved"
+  order.save()
+  messages.success(request,"Order approved!!!")
+  return redirect ("index")
+  
+def order_reject(request, pk):
+  order= NewOrder.objects.get(pk=pk)
+  order.order_status="Rejected"
+  order.save()
+  messages.success(request,"Order rejected!!!")
+  return redirect ("index")
+
+

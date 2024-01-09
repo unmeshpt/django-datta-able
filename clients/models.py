@@ -16,6 +16,7 @@ class NewOrder(models.Model):
     STATUS = [
         ('New', 'New'),
         ('Active', 'Active'),
+        ('Approved', 'Approved'),
         ('Cancelled', 'Cancelled'),
         ('Pending', 'Pending'),
         ('Done', 'Done')

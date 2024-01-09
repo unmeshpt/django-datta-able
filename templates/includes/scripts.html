@@ -1,6 +1,9 @@
 {% load static %}
 
 <!-- Required Js -->
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+
 <script src="{% static 'assets/js/vendor-all.min.js' %}"></script>
 <script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'assets/js/pcoded.min.js' %}"></script>
@@ -8,19 +11,19 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-{% if messages %} 
-  {% for message in messages %}
-      Swal.fire({
-        position: "top-end",
-        icon: "{{message.tags}}",
-        title: "{{message}}",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-  {% endfor %} 
-{% endif %}
+  {% if messages %} 
+    {% for message in messages %}
+        Swal.fire({
+          position: "top-end",
+          icon: "{{message.tags}}",
+          title: "{{message}}",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+    {% endfor %} 
+  {% endif %}
 
-new DataTable('#example', {
-  order: [[3, 'desc']]
-});
+  $('#example').DataTable({
+  searching:false
+  })
 </script>
