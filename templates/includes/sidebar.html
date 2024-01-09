@@ -80,7 +80,7 @@
             <hr>
             <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="#" >Inbox</a><span
               class="pcoded-badge label label-danger">NEW</span></li>      
-            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="#" >Sent</a></li>
+            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="{% url 'orders' %}" >Sent</a></li>
             <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="#" >Recycle Bin</a></li>
             
           </ul>
@@ -99,8 +99,7 @@
           <ul class="pcoded-submenu">
             <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="{% url 'icon_feather' %}" class="">Feather<span
                   class="pcoded-badge label label-danger">NEW</span></a></li>
-            <li class="{% if 'feather_icon' in segment %}active{% endif %}"><a href="{% url 'table' %}" class="">Table<span
-              class="pcoded-badge label label-danger">NEW</span></a></li>
+
           </ul>
         </li>
 

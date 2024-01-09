@@ -6,15 +6,19 @@ from company.models import *
 from .models import *
 from api.serializers import *
 
-# def create_ordernumber():
-#     current_year = datetime.now().year
-#     total_order = LastOrderNo.objects.count()
-#     new_order_no=total_order + 1
-#     order_no = f'{'ORD-' + str(current_year)[-2:]}/{str(new_order_no).zfill(3)}'
-#     return order_no
-
 # Create your views here.
-    
+@login_required(login_url='/accounts/login/')
+def orders(request):
+    all_oders = NewOrder.objects.filter(user=request.user).order_by('order_no')
+    order_items= OrderItem.objects.all()
+    context = {
+        'parent': 'clients', 'segment': 'sent_orders', 
+        'all_oders':all_oders, 'order_items':order_items,
+    }
+
+    return render(request, 'pages/clients/sent.html', context)
+
+
 @login_required(login_url='/accounts/login/')
 def add_product(request):
     if request.method == 'POST':
@@ -26,16 +30,6 @@ def add_product(request):
        orderitem.save()
        # messages.success(request,"Item Added successfully")
        return redirect('new_order')
-    
-    # order_items= OrderItem.objects.filter(new_order__order_no=order_no)
-    # products=Products.objects.all()
-    # services=Services.objects.all()
-    # context = {
-    #     'parent': 'clients', 'segment': 'new_order',
-    #     'oder_no':order_no, 'products':products,
-    #     'services':services, 'order_items':order_items,
-    # }
-    # return render(request, 'pages/clients/new_order.html', context)
 
 @login_required(login_url='/accounts/login/')
 def create_order(request):
@@ -90,3 +84,19 @@ def delete_addeditem(request, id):
     instance.delete()
     messages.success(request,"Item deleted successfully")
     return redirect('new_order')
+
+@login_required (login_url='/accounts/login/')
+def del_order(request, id):
+    instance = get_object_or_404(NewOrder, id=id)
+    instance.delete()
+    messages.success(request,"Order deleted successfully")
+    return redirect('orders')
+
+@login_required (login_url='/accounts/login/')
+def view_order(request, id):
+    order = NewOrder.objects.get(pk=id)
+    order_items= OrderItem.objects.filter(new_order__order_no=order.order_no).order_by('id')
+    context = {
+        'order_items':order_items,   
+    }
+    return render(request, 'pages/clients/sent.html', context)

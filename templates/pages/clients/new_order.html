@@ -125,7 +125,6 @@
                   </td>
                   <td class="text-center">{{ items.quantity }}</td>
                   <td class="text-center">
-                    {% comment %} {% url 'delete_addeditem' items.id %} {% endcomment %}
                     <a href=" {% url 'delete_addeditem' items.id %}"  id="{{items.id}}" title="Delete"><span
                       class="pcoded-badge label label-danger"><i class="feather icon-trash-2"></span></i></a
                     >

@@ -32,8 +32,13 @@ class NewOrder(models.Model):
     def __str__(self):
         return self.order_no
     
+    def delete(self, *args, **kwargs):
+        # Delete the file associated with the instance
+        self.assets.delete()
 
-    
+        # Call the base class delete() method to delete the model instance
+        super().delete(*args, **kwargs)
+
 def generate_order_number():
     current_date = timezone.now().strftime('%Y')
     current_year=str(current_date)[-2:]
