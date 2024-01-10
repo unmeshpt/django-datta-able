@@ -1,12 +1,12 @@
 <!--[ daily sales section ] start-->
-<div class="col-md-6 col-xl-3">
+<div class="col-md-6 col-xl-2">
     <div class="card daily-sales">
       <div class="card-block">
         <h6 class="mb-4">Total Oders</h6>
         <div class="row d-flex align-items-center">
           <div class="col-9">
             <h3 class="f-w-300 d-flex align-items-center m-b-0"><i
-                class="feather icon-package text-c-blue f-30 m-r-10"></i>{{activeorders.count}}</h3>
+                class="feather icon-package text-c-blue f-30 m-r-10"></i>{{allorders.count}}</h3>
           </div>
 
           <div class="col-3 text-right">
@@ -14,7 +14,7 @@
           </div>
         </div>
         <div class="progress m-t-30" style="height: 7px;">
-          <div class="progress-bar progress-c-theme" role="progressbar" style="width: {{activeorders.count}}%;"
+          <div class="progress-bar progress-c-theme" role="progressbar" style="width: {{allorders.count}}%;"
             aria-valuenow="{{activeorders.count}}" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
       </div>
@@ -22,7 +22,7 @@
   </div>
   <!--[ daily sales section ] end-->
   <!--[ Monthly  sales section ] starts-->
-  <div class="col-md-6 col-xl-3">
+  <div class="col-md-6 col-xl-2">
     <div class="card Monthly-sales">
       <div class="card-block">
         <h6 class="mb-4">Approved Oders</h6>
@@ -44,7 +44,7 @@
   </div>
   <!--[ Monthly  sales section ] end-->
   <!--[ year  sales section ] starts-->
-  <div class="col-md-6 col-xl-3">
+  <div class="col-md-6 col-xl-2">
     <div class="card yearly-sales">
       <div class="card-block">
         <h6 class="mb-4">Pending Oders</h6>
@@ -66,7 +66,51 @@
   </div>
   <!--[ year  sales section ] end-->
   <!--[ year  sales section ] starts-->
-  <div class="col-md-6 col-xl-3">
+  <div class="col-md-6 col-xl-2">
+    <div class="card yearly-sales">
+      <div class="card-block">
+        <h6 class="mb-4">Rejected Orders</h6>
+        <div class="row d-flex align-items-center">
+          <div class="col-9">
+            <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i
+                class="feather icon-minus-circle text-c-red f-30 m-r-10"></i>{{rejectedorders.count}}</h3>
+          </div>
+          <div class="col-3 text-right">
+            <p class="m-b-0">{{rejectedorders.count}}%</p>
+          </div>
+        </div>
+        <div class="progress m-t-30" style="height: 7px;">
+          <div class="progress-bar progress-c-theme2" role="progressbar" style="width: {{rejectedorders.count}}%;"
+            aria-valuenow="{{rejectedorders.count}}" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--[ year  sales section ] end-->
+    <!--[ year  sales section ] starts-->
+    <div class="col-md-6 col-xl-2">
+      <div class="card yearly-sales">
+        <div class="card-block">
+          <h6 class="mb-4">Cancelled Orders</h6>
+          <div class="row d-flex align-items-center">
+            <div class="col-9">
+              <h3 class="f-w-300 d-flex align-items-center  m-b-0"><i
+                  class="feather icon-x-circle text-c-purple f-30 m-r-10"></i>{{cancelledorders.count}}</h3>
+            </div>
+            <div class="col-3 text-right">
+              <p class="m-b-0">{{cancelledorders.count}}%</p>
+            </div>
+          </div>
+          <div class="progress m-t-30" style="height: 7px;">
+            <div class="progress-bar progress-c-theme2" role="progressbar" style="width: {{cancelledorders.count}}%;"
+              aria-valuenow="{{cancelledorders.count}}" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--[ year  sales section ] end-->
+      <!--[ year  sales section ] starts-->
+  <div class="col-md-6 col-xl-2">
     <div class="card yearly-sales">
       <div class="card-block">
         <h6 class="mb-4">Rejected Orders</h6>
@@ -109,11 +153,12 @@
                         <p class="m-0">{{ order.project_name | upper }}</p>
                       </td>
                       <td>
-                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ order.created_at | date:"D d-m-Y"  }}</h6>
+                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i> {{ order.created_at | date:"D d-m-Y"  }}</h6>
                       </td>
                       <td>
                         {% comment %} <a href="{% url 'order_reject' order.id %}" class="label theme-bg1 text-white f-12">View</a> {% endcomment %}
-                        <a href="{% url 'order_cancel' order.id %}" class="label theme-bg2 text-white f-12">Cancel</a>
+                        <a href="{% url 'order_cancel' order.id %}" class="label theme-bg text-white f-12">Cancel</a>
+                        <a href="{% url 'order_pending' order.id %}" class="label theme-bg1 text-white f-12">Pending</a>
                       </td>
                     </tr>
                     {% endif %}

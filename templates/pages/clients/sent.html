@@ -14,7 +14,7 @@
 
           {% if all_oders %}
           <div class="table-responsive">
-            <table class="table table-striped" id="example" style="width:100%">
+            <table class="table  table-hover"  style="width:100%">
               <thead>
                 <tr>
                   <th scope="col" class="text-left">Date</th>
@@ -27,26 +27,31 @@
               </thead>
               <tbody>
                 {% for order in all_oders %}
-                    <tr>
-                      {% if  order.order_status == 'Active' %}  
+                    <tr class="unread" >
+                      {% if  order.order_status != 'New' %}  
                         
                         <td class="text-left">{{ order.created_at | date:'d-m-Y' }}</td>
                         <td class="text-left">{{ order.order_no }}</td>
                         <td class="text-left">{{ order.project_name | upper }}</td>
                         <td class="text-center">{{ order.deadline | date:'d-m-Y' }}</td>
-                        <td class="text-left">{{ order.order_status }}</td>
-                        <td class="text-center">
-                            <a  title="View" data-toggle="modal" data-target="#products{{order.id}}"><span
-                                class="pcoded-badge label label-primary"><i class="feather icon-eye"></span></i></a>
 
-                            <a href=" {% url 'del_order' order.id %}"  id="{{order.id}}" title="Delete" ><span
-                            class="pcoded-badge label label-danger"><i class="feather icon-trash-2"></span></i></a>
+                        {% if  order.order_status == 'Active' %}  
+                          <td class="text-left"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ order.order_status }}</td>
+                        {% elif  order.order_status == 'Rejected' %}  
+                          <td class="text-left"><i class="fas fa-circle text-c-red f-10 m-r-15"></i>{{ order.order_status }}</td>
+                        {% elif  order.order_status == 'Cancelled' %}  
+                          <td class="text-left"><i class="fas fa-circle text-c-purple f-10 m-r-15"></i>{{ order.order_status }}</td>
+                        {% else %}  
+                          <td class="text-left"><i class="fas fa-circle text-c-blue f-10 m-r-15"></i>{{ order.order_status }}</td>
+                        {% endif %}
+
+                        <td class="text-center">
+                            <a class="label theme-bg text-white f-12" href="#" id="openModal" tit="{{order.id}}" >view</a>
                         </td>
-                        {% comment %} {% include 'pages/clients/include/items.html' %} {% endcomment %}
+                  
                       {% endif %}
                     </tr> 
                 {% endfor %}
-              </tbody>
             </table>
           </div>
           {% endif %}
@@ -54,8 +59,10 @@
       </div>
     </div>
   </div>
-  
+  {% include "pages/clients/include/items.html" %}
   <!-- [ Main Content ] end -->
  
-
+  
  {% endblock content %}
+
+

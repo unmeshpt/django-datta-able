@@ -54,6 +54,12 @@ File: style.css
 @import url("../fonts/feather/css/feather.css");
 @import url("../plugins/jquery-scrollbar/css/jquery.scrollbar.min.css");
 @import url("../fonts/datta/datta-icon.css");
+
+
+
+
+
+
 /**  =====================
       Custom css start
 ==========================  **/
@@ -72,7 +78,7 @@ body {
 
 a:hover {
   outline: none ; 
-  text-decoration: none;
+  text-decoration: none !;
 }
 
 h1,
@@ -143,6 +149,10 @@ strong {
 
 .theme-bg2 {
   background: linear-gradient(-135deg, #899FD4 0%, #A389D4 100%);
+}
+
+.theme-bg3 {
+  background: linear-gradient(-135deg, #d489a8 0%, #e24f6f 100%);
 }
 
 /* ==========  card css start  =========== */

@@ -20,7 +20,7 @@ class NewOrder(models.Model):
         ('Rejected', 'Rejected'),
         ('Cancelled', 'Cancelled'),
         ('Pending', 'Pending'),
-        ('Done', 'Done')
+        ('Completed', 'Completed')
     ]    
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='user_order')
     order_no = models.CharField(max_length=20, unique=True)

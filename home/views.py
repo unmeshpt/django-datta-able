@@ -44,6 +44,13 @@ def order_reject(request, pk):
   messages.success(request,"Order rejected!!!")
   return redirect ("index")
 
+def order_pending(request, pk):
+  order= NewOrder.objects.get(pk=pk)
+  order.order_status="Pending"
+  order.save()
+  messages.success(request,"Order Pending!!!")
+  return redirect ("index")
+
 def order_cancel(request, pk):
   order= NewOrder.objects.get(pk=pk)
   order.order_status="Cancelled"
@@ -51,4 +58,10 @@ def order_cancel(request, pk):
   messages.success(request,"Order Cancelled!!!")
   return redirect ("index")
 
+def order_completed(request, pk):
+  order= NewOrder.objects.get(pk=pk)
+  order.order_status="Completed"
+  order.save()
+  messages.success(request,"Order Completed!!!")
+  return redirect ("index")
 

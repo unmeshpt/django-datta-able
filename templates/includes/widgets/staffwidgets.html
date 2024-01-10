@@ -90,85 +90,40 @@
 
   <div class="col-xl-8 col-md-6">
     <div class="card Recent-Users">
-
-      {% if products %}
-
-        <div class="card-header">
-          <h5>Products</h5>
-        </div>
-        <div class="card-block px-0 py-3">
-          <div class="table-responsive">
-            <table class="table table-hover">
-
-              <tbody>
-                {% for p in products %}
-
+      <div class="card-header">
+        <h5>Recent Oders</h5>
+      </div>
+      <div class="card-block px-0 py-3">
+        <div class="table-responsive">
+          <table class="table table-hover" id="example"> 
+            <tbody>
+              
+                {% for order in activeorders %}
+                  {% if  order.order_status == "Active" %}
                   <tr class="unread">
-                    <td><img class="rounded-circle" style="width:40px;" src="{% static 'assets/images/user/avatar-1.jpg' %}"
+                    <td><img class="rounded-circle" style="width:40px;" src="{{ order.user.profileimg.url}}"
                         alt="activity-user">
                     </td>
                     <td>
-                      <h6 class="mb-1">{{ p.name }}</h6>
-                      <p class="m-0">{{ p.info }}</p>
+                      <h6 class="mb-1">{{ order.order_no}}</h6>
+                      <p class="m-0">{{ order.project_name | upper }}</p>
                     </td>
                     <td>
-                      <h6 class="text-muted">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <i class="fas fa-tag text-c-green f-10 m-r-15"></i>
-                        ${{ p.price }}
-                      </h6>
+                      <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ order.created_at | date:"D d-m-Y"  }}</h6>
                     </td>
                     <td>
-                      <a href="#" class="label theme-bg2 text-white f-12">View</a>
-                      <a href="#" class="label theme-bg text-white f-12">Delete</a>
-                    </td>
-                  </tr>
-
-                {% endfor %}
-              </tbody>
-              
-            </table>
-          </div>
-        </div>
-
-      {% else %}
-      
-        <div class="card-header">
-          <h5>Recent Oders</h5>
-        </div>
-        <div class="card-block px-0 py-3">
-          <div class="table-responsive">
-            <table class="table table-hover">
-              <tbody>
-                
-                  {% for order in activeorders %}
-                    {% if  order.order_status == "Active" %}
-                    <tr class="unread">
-                      <td><img class="rounded-circle" style="width:40px;" src="{{ order.user.profileimg.url}}"
-                          alt="activity-user">
-                      </td>
-                      <td>
-                        <h6 class="mb-1">{{ order.order_no}}</h6>
-                        <p class="m-0">{{ order.project_name | upper }}</p>
-                      </td>
-                      <td>
-                        <h6 class="text-muted"><i class="fas fa-circle text-c-green f-10 m-r-15"></i>{{ order.created_at | date:"D d-m-Y"  }}</h6>
-                      </td>
-                      <td>
-                        <a href="{% url 'order_reject' order.id %}" class="label theme-bg1 text-white f-12">View</a>
+                      <a href="{% url 'order_reject' order.id %}" class="label theme-bg1 text-white f-12">View</a>
+                      {% if  profiles.is_admin %}
                         <a href="{% url 'order_reject' order.id %}" class="label theme-bg2 text-white f-12">Reject</a>
                         <a href="{% url 'order_approve' order.id %}" class="label theme-bg text-white f-12">Approve</a>
-                      </td>
-                    </tr>
-                    {% endif %}
-                  {% endfor %}
-              </tbody>
-            </table>
-          </div>
+                      {% endif %}
+                    </td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+            </tbody>
+          </table>
         </div>
-
-      {% endif %}
-
-
+      </div>
     </div>
   </div>
